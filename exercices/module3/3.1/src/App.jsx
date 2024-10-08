@@ -1,4 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const LoadingText = (props) => {
+    return (
+        <h1>{props.text}</h1>
+    )
+}
 
 const StatisticLine = (props) => {
   return (
@@ -30,8 +36,7 @@ const Statistics = (props) => {
             value={(props.good / props.total) * 100 + " %"}
           />
         </tbody>
-        </table>
-      
+      </table>
     );
 };
 
@@ -40,24 +45,38 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const total = good + bad + neutral;
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    // Cleanup the timer if the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div>
-      <h1>give feedback</h1>
-
-      <Button handleClick={() => setGood(good + 1)} text="good" />
-      <Button handleClick={() => setNeutral(neutral + 1)} text="neutral" />
-      <Button handleClick={() => setBad(bad + 1)} text="bad" />
-
-      <h1>statistics</h1>
-      {total !== 0 ? (
-        <Statistics good={good} neutral={neutral} bad={bad} total={total}/>
-      ) : (
-        <h3>No feedback given</h3>
-      )}
-    </div>
+    loading === true ? (
+        <LoadingText text="CHARGEMENT...." />
+    ) : (
+        <div>
+        <h1>give feedback</h1>
+  
+        <Button handleClick={() => setGood(good + 1)} text="good" />
+        <Button handleClick={() => setNeutral(neutral + 1)} text="neutral" />
+        <Button handleClick={() => setBad(bad + 1)} text="bad" />
+  
+        <h1>statistics</h1>
+        {total !== 0 ? (
+          <Statistics good={good} neutral={neutral} bad={bad} total={total}/>
+        ) : (
+          <h3>No feedback given</h3>
+        )}
+      </div>
+    )
   );
 };
 
