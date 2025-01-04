@@ -1,0 +1,15 @@
+{
+  "name": "6.1",
+  "version": "1.0.0",
+  "description": "ex 3.12 mangoDB",
+  "main": "mango.js",
+  "scripts": {
+    "start": "node mongo.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^6.10.0",
+    "mongoose": "^8.8.1"
+  }
+}
