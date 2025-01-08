@@ -1,0 +1,64 @@
+@baseUrl=http://localhost:3001
+
+### Complete this file with your own request to tests your API
+
+### Get all books
+GET {{baseUrl}}/books
+Accept: application/json
+
+### Comment a book
+POST {{baseUrl}}/books/addComment
+Accept: application/json
+Content-Type: application/json
+
+{
+    "idBook": "6461f476d9a9da9dbeade34e",
+    "comment": "This is a comment",
+    "username": "user"
+}
+
+### Comment a book with 5 characters
+POST {{baseUrl}}/books/addComment
+Accept: application/json
+Content-Type: application/json
+
+{
+    "idBook": "6461f476d9a9da9dbeade34e",
+    "comment": "Thiss",
+    "username": "user2"
+}
+
+### Comment a book with invalid username
+POST {{baseUrl}}/books/addComment
+Accept: application/json
+Content-Type: application/json
+
+{
+    "idBook": "6461f476d9a9da9dbeade34e",
+    "comment": "This is a comment",
+    "username": "use"
+}
+
+### Comment a book with invalid idBook
+POST {{baseUrl}}/books/addComment
+Accept: application/json
+Content-Type: application/json
+
+{
+    "idBook": "6461f476d9a9da9dbeade34d",
+    "comment": "This is a comment",
+    "username": "user3"
+}
+
+### Comment a book with same user
+POST {{baseUrl}}/books/addComment
+Accept: application/json
+Content-Type: application/json
+
+{
+    "idBook": "6461f476d9a9da9dbeade34e",
+    "comment": "This is a comment",
+    "username": "user"
+}
+
+
